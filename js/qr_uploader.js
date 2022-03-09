@@ -1,24 +1,36 @@
 const testFunction = async () => {
-    console.log('testFunction');
     let file = document.getElementById('file').files[0];
-    const url = 'http://127.0.0.1:8081/read_qrcode';
-    let data = new FormData();
-    const metadata = JSON.stringify({
-        'title': 'test',
-        'description': 'test',
-    })
-    data.append('file', metadata);
+    console.log(file);
 
-    return axios.post(url, data, {
-        maxBodyLength: 'Infinity',
+    // const url = 'http://test-api-genobank.herokuapp.com/read_qrcode';
+    const url = 'http://localhost:5000/read_qrcode';
+    const formData = new FormData();
+    formData.append('file', file);
+
+    axios.post(url, formData, {
         headers: {
-            "Access-Control-Allow-Origin": "http://127.0.0.1:5500"
+            'Content-Type': 'multipart/form-data'
+        },
+        params:{
+            'data': 'DATAAAAAAAAAAAAAAAA'
         }
-    }).then(function (response) {
+    })
+    .then(response=>{
         console.log(response);
-    }).catch(function (error) {
-        console.log(error);
-    });
+    }).catch(err=>{
+        console.log(err)
+    })
+
+    // axios.get(url, {
+    //     params: {
+    //         data: file
+    //     }
+    // })
+    // .then(response=>{
+    //     console.log(response);
+    // }).catch(err=>{
+    //     console.log(err)
+    // })
 
 }
 
