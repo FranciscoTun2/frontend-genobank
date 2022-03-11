@@ -232,9 +232,7 @@ function loadLocalizedData() {
   let procJson = data.permitteeRepresentation.procedure
   // procJson to String
   procJson = JSON.stringify(procJson);
-  console.log(procJson);
   
-  console.log(data.permitteeRepresentation.procedure);
   $('#procedureType').html(procedure);
   $('#procedureResult').html(procedureResult);
 }
@@ -355,10 +353,8 @@ async function verifyData() {
 }
 
 async function loadData(uri) {
-  // const splitUrl = location.href.split('#')
   const splitUrl = uri.split('#')
   if (splitUrl.length == 2) {
-    console.log('loadData', splitUrl)
     data = await decodeCertificateUriData(splitUrl[1], taxonomy);
     if (!data) {
       invalidDataError();

@@ -10,16 +10,21 @@
                 <div class="col-md-12">
                     <h1>QR Reader</h1>
                 </div>
-                <div class="col-md-4">
-                    <h1></h1>
-                </div>
-                <div class="col-md-4">
-                    <input type="file" id="file" accept="image/*" capture="camera" value="Open Camera">
-                    <label for="file"></label>
-                    <div class="col-md-12">
+
+           
+                <!-- <div class="col-md-12"> -->
+                    <div class="col-ms-4">
+                        <input type="file" id="file" accept="image/*" capture="camera" value="Open Camera">
+                    </div>
+                    <div class="col-ms-4"></div>
+                        <div class="spinner-border text-primary" role="status" id="spinerscann" style="display: none;">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <button id="btn-scan" class="btn btn-primary">Analyze Image</button>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
         <div class ="row">
@@ -52,8 +57,12 @@
                             <label for="test dat">Test Date</label>
                             <input type="test" class="form-control" id="testdate" placeholder="Test Date">
                         </div>
-                        <button type="submit" class="btn btn-primary">Confirm</button>
+                        <div class="form-group">
+                            <label for="test dat">email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
                     </form>
+                    <button class="btn btn-primary" id="confirmData">Confirm</button>
                 </div>
             </div>
         </div>
@@ -64,7 +73,8 @@
         integrity="sha512-K0C1mRo24qjHQIipSMg5Rj4Gc2mqKgEcog7IKWy81pe3h+qJYoOXddVeYkUG+S9SAtMg4OfziI1KPc1xgNqarg=="
         crossorigin="anonymous"></script>
         <script src="/js/verify-certificate-ui.js"></script>
-        <script src="/js/certificate.js"></script>
+        <script src="/js/certificate_old.js"></script>
+        <!-- <script src="/js/certificate.js"></script> -->
         <script src="https://cdn.jsdelivr.net/gh/Genobank/genobankio-js@1.0.7/js/genobank.min.js" integrity="sha384-Oh/T2FOv2HxxKNJQCZO9IzazmdXlty/FGnT/s5kWICxjPuQLfpkRUfrpaIg/sqHZ" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <!-- <script src="https://genobank.io/test/certificates/js/verify-certificate-ui.js"></script> -->
