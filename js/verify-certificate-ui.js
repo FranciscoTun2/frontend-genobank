@@ -278,6 +278,7 @@ async function verifyData() {
     errors.push(`<span class="localized es"> <span class="text-danger"><i class="fa fa-times"></i> Assinatura do certificado inválida.</span></span>`);
   }
   const permittee = await getPermittee(data.permitteeSignature.permitteeSerial);
+  console.log(permittee);
   if (permittee && !permittee.errors) {
     if (permittee.data.owner !== addressPermittee && errors.length == 0) {
       errors.push(`<span class="localized en"> <span class="text-danger"><i class="fa fa-times"></i> Invalid laboratory signature or data.</span></span>`);
@@ -368,6 +369,8 @@ async function loadData(uri) {
   }
   return true;
 }
+
+
 
 function invalidDataError() {
   $('#invalidData').modal('show');
