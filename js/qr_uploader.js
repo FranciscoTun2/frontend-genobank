@@ -23,7 +23,7 @@ let testdate = document.getElementById('testdate');
 let spinnerscann = document.getElementById('spinerscann');
 let email = document.getElementById('email');
 
-
+let dataPatient = null
 
 const scanImage = async () => {
     taxonomy = new window.$genobank.LaboratoryProcedureTaxonomy();
@@ -98,15 +98,25 @@ const scanImage = async () => {
         divScann.style.display = 'none';
         divForm.style.display = 'block';
 
-        inputName.value = array.arrayData[0];
-        idnumber.value = array.arrayData[1];
+        inputName.value = array.arrayData[0]
+        idnumber.value = array.arrayData[1]
         test.value = procedure
         inputresult.value = procedureResult
-        // lab.value = array.arrayData[4];
         labName.innerHTML = laboratoryData.name;
-        labInvest.innerHTML = laboratoryData.investigator;
-        labImage.src = laboratoryData.logo;
-        testdate.value = array.arrayData[5];
+        labInvest.innerHTML = laboratoryData.investigator
+        labImage.src = laboratoryData.logo
+        testdate.value = array.arrayData[5]
+
+        dataPatient={
+            "name": array.arrayData[0],
+            "idnumber": array.arrayData[1],
+            "test": procedure,
+            "inputresult": procedureResult,
+            "labName": laboratoryData.name,
+            "labInvestigator": laboratoryData.investigator,
+            "labLogo": laboratoryData.logo,
+            "testdate": array.arrayData[5]
+        }
 
 
     }else{
@@ -117,55 +127,48 @@ const scanImage = async () => {
 
 
 const signUp = async () => {
+    let btnConfirm = document.getElementById('confirmData');
+    let spinnerConfirm = document.getElementById('spinnerConfirm');
+
+    let alerSuccess = document.getElementById('alertSuccess');
+    let alertError = document.getElementById('alertError');
+    
     const url = host+'sign_up';
     const formData = new FormData();
 
-    let nam = inputName.value;
-    let idNumb = idnumber.value;
-    let teste = test.value;
-    let inputres = inputresult.value;
-    let laboratory = lab.value;
-    let testedate = testdate.value;
     let mail = email.value;
 
-    if (email === ''){
+    if (mail === ''){
         alert('Please enter your email');
     }else{
+        btnConfirm.disabled = true;
+        spinnerConfirm.style.display = 'flexbox';
+        dataPatient['email'] = mail
+        console.log("dataaPATIENTE",dataPatient)
+        dataPatient = JSON.stringify(dataPatient);
+
+        // formData.append("data",data);
+        formData.append("data",dataPatient);
+        let responseSignUp = await axios.post(url, formData)
+        .then(response=>{
+            // spinnerscann.style.display = 'none';
+            alertSuccess.style.display = 'block';
+            alertError.style.display = 'none';
+            btnConfirm.disabled = false;
+            spinnerConfirm.style.display = 'none';
+            return response
+        }).catch(err=>{
+            alertError.innerHTML = err.response.data.message;
+            alertError.style.display = 'block';
+            alertSuccess.style.display = 'none';
+            // spinnerscann.style.display = 'none';
+            btnConfirm.disabled = false;
+            spinnerConfirm.style.display = 'none';
+            console.log(err)
+        })
+        console.log(responseSignUp)
 
     }
-
-    let data = {
-        "name": nam,
-        "idnumber": idNumb,
-        "test": teste,
-        "inputresult": inputres,
-        "lab": laboratory,
-        "testdate": testedate,
-        "email": mail
-
-    }
-
-    data = JSON.stringify(data);
-
-    formData.append("data",data);
-
-    let responseSignUp = await axios.post(url, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-        params:{
-            'data': 'Data sample'
-        }
-    })
-    .then(response=>{
-        // spinnerscann.style.display = 'none';
-        return response
-    }).catch(err=>{
-        // spinnerscann.style.display = 'none';
-        console.log(err)
-    })
-
-
 }
 
 // document.getElementById("btn-scan").addEventListener("click", scanImage);
