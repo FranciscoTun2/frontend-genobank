@@ -130,7 +130,7 @@ const signUp = async () => {
     let btnConfirm = document.getElementById('confirmData');
     let spinnerConfirm = document.getElementById('spinnerConfirm');
 
-    let alerSuccess = document.getElementById('alertSuccess');
+    let alertSuccess = document.getElementById('alertSuccess');
     let alertError = document.getElementById('alertError');
     
     const url = host+'sign_up';
@@ -144,11 +144,10 @@ const signUp = async () => {
         btnConfirm.disabled = true;
         spinnerConfirm.style.display = 'flexbox';
         dataPatient['email'] = mail
-        console.log("dataaPATIENTE",dataPatient)
-        dataPatient = JSON.stringify(dataPatient);
+        let dataPatientString = JSON.stringify(dataPatient);
 
         // formData.append("data",data);
-        formData.append("data",dataPatient);
+        formData.append("data",dataPatientString);
         let responseSignUp = await axios.post(url, formData)
         .then(response=>{
             // spinnerscann.style.display = 'none';
