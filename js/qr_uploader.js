@@ -32,7 +32,8 @@ const scanImage = async () => {
     file = file.files[0];
     if (file != null) {
         // const url = 'https://api-genobank-test.herokuapp.com/read_qrcode';
-        const url = host+'read_qrcode';
+        // const url = host+'read_qrcode';
+        const url = host+'validate_pdf';
 
         spinnerscann.style.display = 'block';
 
@@ -103,7 +104,7 @@ const scanImage = async () => {
         test.value = procedure
         inputresult.value = procedureResult
         labName.innerHTML = laboratoryData.name;
-        labInvest.innerHTML = laboratoryData.investigator
+        labInvest.innerHTML = (laboratoryData.investigator).split('|')[0]
         labImage.src = laboratoryData.logo
         testdate.value = array.arrayData[5]
 
@@ -111,9 +112,9 @@ const scanImage = async () => {
             "name": array.arrayData[0],
             "idnumber": array.arrayData[1],
             "test": procedure,
-            "inputresult": procedureResult,
+            "testresult": procedureResult,
             "labName": laboratoryData.name,
-            "labInvestigator": laboratoryData.investigator,
+            "labInvestigator": (laboratoryData.investigator).split('|')[0],
             "labLogo": laboratoryData.logo,
             "testdate": array.arrayData[5]
         }
@@ -145,6 +146,8 @@ const signUp = async () => {
         spinnerConfirm.style.display = 'flexbox';
         dataPatient['email'] = mail
         let dataPatientString = JSON.stringify(dataPatient);
+
+        console.log(dataPatientString)
 
         // formData.append("data",data);
         formData.append("data",dataPatientString);
