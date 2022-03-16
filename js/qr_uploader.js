@@ -1,7 +1,7 @@
 
 // let host = "https://api-genobank-test.herokuapp.com/"
 // let host = "http://192.168.50.219:5000/"
-let host = "http://localhost:5000/"
+let host = "http://localhost:8081/"
 let APIGENOPERMITEE = "https://api.genobank.io/permittees/";
 let APIGENOPROFILES = "https://api.genobank.io/profiles/";
 
