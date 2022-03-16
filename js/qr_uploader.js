@@ -41,22 +41,15 @@ const scanImage = async () => {
         formData.append('file', file);
         taxonomy = new window.$genobank.LaboratoryProcedureTaxonomy();
 
-        let data = await axios.post(url, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            params:{
-                'data': 'Data sample'
-            }
-        })
+        let data = await axios.post(url, formData)
         .then(response=>{
+            console.log(response)
             spinnerscann.style.display = 'none';
             return response
         }).catch(err=>{
             spinnerscann.style.display = 'none';
             console.log(err)
         })
-
 
         let certificateUri = data.data[0]
         let array = data.data[1]
@@ -89,7 +82,6 @@ const scanImage = async () => {
         // console.log(datos.permitteeRepresentation.permitteeSerial)
 
         laboratoryData = _jsonData[datos.permitteeRepresentation.permitteeSerial]
-        console.log(laboratoryData)
 
 
         const procedure = taxonomy.getProcedureDescription(datos.permitteeRepresentation.procedure, 'en');
